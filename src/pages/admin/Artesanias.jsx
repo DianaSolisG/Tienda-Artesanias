@@ -100,7 +100,7 @@ const TablaArtesanias = ({loading, listaArtesanias, setEjecutarConsulta}) => {
             onChange={(e) => setBusqueda(e.target.value)}
             placeholder='Buscar'
             className='border-2 border-gray-700 px-3 py-1 self-start rounded-md focus:outline-none focus:border-blue-500'/>
-               <h2 className='text-2xl font-extrabold text-gray-800'>Todo las artesanias</h2>
+            <h2 className='text-2xl font-extrabold text-gray-800'>Todo las artesanias</h2>
             <div className='hidden md:flex w-full'>
             {loading ? (
           <ReactLoading type='cylon' color='#abc123' height={667} width={375} />
