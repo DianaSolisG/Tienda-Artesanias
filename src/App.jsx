@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AuthLayout from 'layouts/AuthLayout';
 import PrivateLayout from 'layouts/PrivateLayout';
 import PublicLayout from 'layouts/PublicLayout';
@@ -12,25 +12,44 @@ import Usuarios  from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
+import { Auth0Provider } from "@auth0/auth0-react";
+import { UserContext } from 'context/userContext';
+import { DarkModeContext } from 'context/darkMode';
+
+
 
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const [userData, setUserData] = useState({});
+  useEffect(() => {
+    console.log('modo dark:', darkMode);
+  }, [darkMode]);
+
 
   return (
+    <Auth0Provider
+    domain="misiontic-tiendaartesanias.us.auth0.com"
+    clientId="cagw9udfStRxY6b6EcnIP4KlIaUe6LfK"
+    redirectUri='http://localhost:3000/admin'
+    audience='api-autenticacion-tienda-artesanias'
+  >
     <div className='App'>
+    <UserContext.Provider value={{ userData, setUserData }}>
+    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
       <Router>
         <Switch>
-          <Route path={['/admin', '/admin/artesanias', '/admin/clientes', '/admin/usuarios', '/admin/ventas']}>
+          <Route path={['/admin', '/admin/artesanias', '/admin/clientes', '/admin/ventas', '/admin/usuarios']}>
             <PrivateLayout>
               <Switch>
                 <Route path='/admin/artesanias'>
                   <Artesanias/>
                 </Route>
-                <Route path='/'>
-                  <Usuarios/>
-                </Route>
-                <Route path='/'>
+                <Route path='/admin/ventas'>
                   <Ventas/>
+                </Route>
+                <Route path='/admin/usuarios'>
+                  <Usuarios/>
                 </Route>
                 <Route path='/'>
                   <Clientes/>
@@ -64,7 +83,10 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      </DarkModeContext.Provider>
+    </UserContext.Provider>
     </div>
+    </Auth0Provider>
   );
 }
 

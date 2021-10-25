@@ -2,8 +2,11 @@ import Sidebar from 'components/Sidebar';
 import React from 'react'
 import SidebarResponsive from 'components/SidebarResponsive';
 
+
+
 const PrivateLayout = ({children}) => {
     return (
+        <PrivateLayout>
         <div className="flex w-screen h-screen">
             <div className='flex flex-col md:flex-row h-full w-full'>
                 <Sidebar/>
@@ -13,6 +16,7 @@ const PrivateLayout = ({children}) => {
                 </main>
             </div>
         </div>
+        </PrivateLayout>
     );
 };
 
