@@ -1,43 +1,15 @@
-import React, {useEffect} from 'react'
-import { useAuth0 } from "@auth0/auth0-react";
-import ReactLoading from 'layouts/PrivateLayout';
+import React from 'react';
+import { useUser } from 'context/userContext';
 
-const PrivateRoute = ({children}) => {
-    const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently  } = useAuth0();
-    useEffect(() => {
-        const fetchAuth0Token = async()=>{
-            const accessToken = await getAccessTokenSilently({
-                audience: `api-autenticacion-tienda-artesanias`,
-            });
-            localStorage.setItem('token', accessToken)
-        }
-        if(isAuthenticated)
-        fetchAuth0Token()
 
-    },[isAuthenticated, getAccessTokenSilently])
+const PrivateRoute = ({ roleList, children }) => {
+    const { userData } = useUser();
 
-    if (isLoading) 
-    return <ReactLoading type='cylin' color='#abc123' height={667} width={375}/>;
-    if(!isAuthenticated){
-        return loginWithRedirect();
+    if (roleList.includes(userData.rol)) {
+      return children;
     }
-    return <>{children}</>
 
-
-
-    //return isAuthenticated ? (
-    //<>{children}</>
-   // ):(
-      // <div>
-       // <div className='text-9xl text-red-400'>No estas autorizado para ver este sitio</div>
-       // <Link to='/'>
-          //  <span className='text-blue-500 font-bold'>
-        //    Llévame al home
-        //    </span>
-            
-        //</Link>
-   // </div>
-    //);
-}
+    return <div className='text-9xl text-red-500 '>No estás autorizado para ver este sitio.</div>;
+};
 
 export default PrivateRoute;

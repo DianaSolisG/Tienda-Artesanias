@@ -112,7 +112,7 @@ const TablaArtesanias = ({loading, listaArtesanias, setEjecutarConsulta}) => {
                         <th>Nombre del Producto</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
-                        <PrivateComponent>
+                        <PrivateComponent roleList={['admin']}>
                         <th>Acciones</th>
                         </PrivateComponent>
                     </tr>
@@ -233,8 +233,9 @@ const FilaArtesania = async({artesania, setEjecutarConsulta}) => {
                 <td>{artesania.precio}</td>
             </>
             )}
-            <PrivateComponent roleList={['admin']}>
+            
         <td>
+        <PrivateComponent roleList={['admin']}>
           <div className='flex w-full justify-around'>
             {edit ? (
               <>
@@ -290,8 +291,8 @@ const FilaArtesania = async({artesania, setEjecutarConsulta}) => {
               </div>
             </div>
           </Dialog>
+          </PrivateComponent>
         </td>
-      </PrivateComponent>
         </tr>
     );
 };

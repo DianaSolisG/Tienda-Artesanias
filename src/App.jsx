@@ -15,9 +15,7 @@ import 'styles/styles.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserContext } from 'context/userContext';
 import { DarkModeContext } from 'context/darkMode';
-
-
-
+import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -43,13 +41,19 @@ function App() {
             <PrivateLayout>
               <Switch>
                 <Route path='/admin/artesanias'>
-                  <Artesanias/>
+                  <PrivateRoute roleList={['admin']}>
+                    <Artesanias/>
+                  </PrivateRoute>
                 </Route>
                 <Route path='/admin/ventas'>
+                  <PrivateRoute roleList={['admin', 'vendedor']}>
                   <Ventas/>
+                  </PrivateRoute>
                 </Route>
                 <Route path='/admin/usuarios'>
+                <PrivateRoute roleList={['admin']}>
                   <Usuarios/>
+                </PrivateRoute>
                 </Route>
                 <Route path='/'>
                   <Clientes/>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import ImagenLogo from './ImagenLogo';
 import { useAuth0 } from "@auth0/auth0-react";
+import PrivateComponent from './PrivateComponent';
 
 const Sidebar = () => {
     const { user, logout } = useAuth0();
@@ -17,9 +18,15 @@ const Sidebar = () => {
                 </Link>
                 <div className='my-4'>
                     <Ruta icono= "fas fa-users" ruta="/admin/perfil" nombre='Perfil' usuario= {user}/>
+                    <PrivateComponent roleList={['admin']}>
                     <Ruta icono= "fad fa-hat-cowboy" ruta="/admin/artesanias" nombre='Artesanias'/>
+                    </PrivateComponent>
+                    <PrivateComponent roleList={['admin', 'vendedor']}>
                     <Ruta icono= "fas fa-cash-register" ruta="/admin/vetas" nombre='Ventas'/>
+                    </PrivateComponent>
+                    <PrivateComponent roleList={['admin']}>
                     <Ruta icono= "fas fa-users" ruta="/admin/usuarios" nombre='Usuarios'/>
+                    </PrivateComponent>
                 </div>
                 <button onClick={() => cerrarSesion }>
                     Cerrar Sesión</button>
