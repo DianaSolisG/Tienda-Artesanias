@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import SidebarResponsive from 'components/SidebarResponsive';
 import { useAuth0 } from '@auth0/auth0-react';
 import ReactLoading from 'react-loading';
-import { obtenerDatosUsuario } from 'utils/api';
+import { obtenerDatosUsuarios } from '../utils/api.js';
 import { useUser } from 'context/userContext';
 
 
