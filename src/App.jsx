@@ -13,9 +13,9 @@ import Ventas from 'pages/admin/Ventas';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 import { Auth0Provider } from "@auth0/auth0-react";
-import { UserContext } from 'context/userContext';
-import { DarkModeContext } from 'context/darkMode';
-import PrivateRoute from 'components/PrivateRoute';
+import { UserContext } from './context/userContext';
+import { DarkModeContext } from './context/darkMode';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);

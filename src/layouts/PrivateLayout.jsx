@@ -4,7 +4,7 @@ import SidebarResponsive from 'components/SidebarResponsive';
 import { useAuth0 } from '@auth0/auth0-react';
 import ReactLoading from 'react-loading';
 import { obtenerDatosUsuarios } from '../utils/api.js';
-import { useUser } from 'context/userContext';
+import { useUser } from '../context/userContext';
 
 
 
@@ -24,7 +24,7 @@ const PrivateLayout = ({children}) => {
         localStorage.setItem('token', accessToken);
         console.log(accessToken);
 
-        await obtenerDatosUsuario(
+        await obtenerDatosUsuarios(
             (response) => {
                 console.log('response con datos del usuario', response);
                 setUserData(response.data);
